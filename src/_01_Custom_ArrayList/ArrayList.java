@@ -4,7 +4,10 @@ package _01_Custom_ArrayList;
 
 public class ArrayList <T>{
 	
+	T[] al;
+	
 	public ArrayList() {
+		al = (T[]) new Object();
 	}
 	
 	public T get(int loc) throws IndexOutOfBoundsException {
