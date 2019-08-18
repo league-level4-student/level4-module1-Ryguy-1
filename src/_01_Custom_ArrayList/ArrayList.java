@@ -37,19 +37,14 @@ public class ArrayList <T>{
 	public void insert(int loc, T val) throws IndexOutOfBoundsException {
 		T temp = null;
 		T[] testArray = (T[]) new Object[al.length+1];
-		for (int i = 0; i < testArray.length-1; i++) {
-			testArray[i]=al[i];
-		}
 		try {
-			for (int i = 0; i < testArray.length-1; i++) {
-				if(i==loc) {
-					System.out.println(al[i]);
-					temp=testArray[i+1];
+			for (int i = 0; i < testArray.length; i++) {
+				if(i<loc) {
+					testArray[i]=al[i];
+				}else if(i==loc) {
 					testArray[i]=val;
-				}else if(i>loc) {
-					System.out.println(testArray[i]);
-					testArray[i]=temp;
-					temp=testArray[i+1];
+				}else {
+					testArray[i]=al[i-1];
 				}
 			}
 			al=testArray;
@@ -77,10 +72,34 @@ public class ArrayList <T>{
 	
 	public void remove(int loc) throws IndexOutOfBoundsException {
 		
+		T[] testArray = (T[]) new Object[al.length-1];
+		try {
+		for (int i = 0; i < testArray.length; i++) {
+			if(i<loc) {
+				testArray[i]=al[i];
+			}else if(i>=loc) {
+				testArray[i]=al[i+1];
+			}
+		}
+			al=testArray;
+		}catch(IndexOutOfBoundsException e) {
+			System.out.println("REMOVE METHOD index out of bounds!");
+			throw e;
+		}
+		
 	}
 	
 	public boolean contains(T val) {
-		
+		for (int i = 0; i < al.length; i++) {
+			if(al[i]==val) {
+				return true;
+			}
+		}
 		return false;
+	
 	}
+	public int size() {
+		return al.length;
+	}
+	
 }
